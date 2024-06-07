@@ -59,11 +59,9 @@ const RealTimeDetection = () => {
           //検出結果を描写
           // console.log("検出結果", predictions);
           renderPredictions(predictions);
-          requestAnimationFrame(() => detectFrame(video, model));
+          //   requestAnimationFrame(() => detectFrame(video, model));
+          setTimeout(() => detectFrame(video, model), 1000);
         });
-      } else {
-        // ビデオの幅と高さが設定されるのを待つ
-        requestAnimationFrame(() => detectFrame(video, model));
       }
     };
 
