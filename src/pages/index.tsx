@@ -6,10 +6,13 @@ export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [model, setModel] = useState<any>(null);
+  const [alertShown, setAleertShown] = useState(false);
 
   useEffect(() => {
     const loadModel = async () => {
+      //GPUを使用し、WEB GLを設定
       await tf.setBackend("webgl");
+      //TensorFlowの初期化
       await tf.ready();
 
       const model = await cocoSsd.load();
@@ -44,13 +47,16 @@ export default function Home() {
       }
     };
 
-    //物体検出と描写
+    //再起的に呼び出される関数。ビデオフレームから物体を検出
     const detectFrame = (
       video: HTMLVideoElement,
       model: cocoSsd.ObjectDetection
     ) => {
       if (video.videoWidth > 0 && video.videoHeight > 0) {
+        //ビデオフレームから物体を検出
         model.detect(video).then((predictions) => {
+          //検出結果を描写
+          // console.log("検出結果", predictions);
           renderPredictions(predictions);
           requestAnimationFrame(() => detectFrame(video, model));
         });
@@ -90,11 +96,16 @@ export default function Home() {
           x,
           y > 10 ? y - 5 : 10
         );
+
+        if (prediction.class === "cell phone" && !alertShown) {
+          setAleertShown(true);
+          alert("cell phone detected!");
+        }
       });
     };
 
     loadModel();
-  }, [model]);
+  }, [model, alertShown]);
 
   return (
     <div>
