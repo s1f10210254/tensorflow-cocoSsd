@@ -114,6 +114,9 @@ const RealTimeDetection = () => {
 
   return (
     <div>
+      <Link href={"/"}>
+        <button>Back to Home</button>
+      </Link>
       <video ref={videoRef} style={{ display: "none" }} />
       <canvas ref={canvasRef} />
     </div>
