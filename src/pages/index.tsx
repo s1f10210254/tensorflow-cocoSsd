@@ -97,7 +97,11 @@ export default function Home() {
           y > 10 ? y - 5 : 10
         );
 
-        if (prediction.class === "cell phone" && !alertShown) {
+        if (
+          prediction.class === "cell phone" &&
+          prediction.score >= 0.85 &&
+          !alertShown
+        ) {
           setAleertShown(true);
           alert("cell phone detected!");
         }
