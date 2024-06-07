@@ -66,9 +66,11 @@ export default function Home() {
       const context = canvas?.getContext("2d");
       if (!context || !canvas || !videoRef.current) return;
 
+      // キャンバスのサイズをビデオに合わせる
       canvas.width = videoRef.current.videoWidth;
       canvas.height = videoRef.current.videoHeight;
 
+      // キャンバスをクリアする
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       // カメラの映像をキャンバスに描画
