@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div>
-      <h1>Welcome to the Object detection App</h1>
+      <h1>物体検知</h1>
       <Link href={"/realtime-detection"}>
         <button>物体検知を開始</button>
       </Link>
